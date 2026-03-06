@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useRoute, Link } from "wouter";
 import { usePriceHistory } from "@/hooks/use-prices";
 import { AdSlot } from "@/components/shared/AdSlot";
-import { ArrowLeft, TrendingUp, TrendingDown, Minus, Info, Calendar } from "lucide-react";
+import { ArrowLeft, TrendingUp, TrendingDown, Minus, Info, Calendar, Activity } from "lucide-react";
 import { 
   AreaChart, 
   Area, 
