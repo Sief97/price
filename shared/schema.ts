@@ -1,18 +1,21 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+// We keep a simple table to satisfy any DB requirements, e.g., saving user preferences later
+export const preferences = pgTable("preferences", {
+  id: serial("id").primaryKey(),
+  theme: text("theme").default("light"),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+export const priceEventSchema = z.object({
+  item_id: z.string(),
+  nameAr: z.string(),
+  category: z.string(),
+  unit: z.string(),
+  date: z.string(),
+  price: z.number(),
+  description: z.string().optional(),
 });
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export type PriceEvent = z.infer<typeof priceEventSchema>;
