@@ -2,14 +2,24 @@ import React from "react";
 import { Link, useLocation } from "wouter";
 import { 
   Home, 
-  Coins, 
+  DollarSign,
+  Coins,
   Globe2, 
   Fuel, 
   Lightbulb, 
   ShoppingCart, 
   Smartphone, 
   HardHat, 
-  Ticket
+  Ticket,
+  Leaf,
+  BarChart3,
+  Zap,
+  MapPin,
+  Cigarette,
+  Utensils,
+  TrendingUp,
+  Building2,
+  BookOpen
 } from "lucide-react";
 import {
   Sidebar,
@@ -24,14 +34,22 @@ import {
 } from "@/components/ui/sidebar";
 
 const CATEGORIES = [
-  { id: "metals-currency", name: "Metals & Currency", icon: Coins },
-  { id: "global-benchmarks", name: "Global Benchmarks", icon: Globe2 },
-  { id: "energy-fuel", name: "Energy & Fuel", icon: Fuel },
-  { id: "utilities-services", name: "Utilities & Services", icon: Lightbulb },
-  { id: "basic-groceries", name: "Basic Groceries", icon: ShoppingCart },
-  { id: "tech-electronics", name: "Tech & Electronics", icon: Smartphone },
-  { id: "construction-agriculture", name: "Construction", icon: HardHat },
-  { id: "digital-subscriptions", name: "Subscriptions", icon: Ticket },
+  { id: "currencies", name: "💱 العملات", icon: DollarSign },
+  { id: "crypto", name: "₿ العملات الرقمية", icon: Coins },
+  { id: "metals", name: "🥇 المعادن", icon: Coins },
+  { id: "fuel", name: "⛽ الوقود", icon: Fuel },
+  { id: "electricity", name: "💡 الكهرباء", icon: Zap },
+  { id: "vegetables", name: "🥬 الخضار", icon: Leaf },
+  { id: "subscriptions", name: "📺 الاشتراكات", icon: Ticket },
+  { id: "transport", name: "🚇 المواصلات", icon: MapPin },
+  { id: "tobacco", name: "🚬 التبغ", icon: Cigarette },
+  { id: "commodities", name: "🛒 السلع الأساسية", icon: ShoppingCart },
+  { id: "automotive", name: "🚗 السيارات", icon: TrendingUp },
+  { id: "tech", name: "📱 التكنولوجيا", icon: Smartphone },
+  { id: "govservices", name: "🏛️ الخدمات الحكومية", icon: Building2 },
+  { id: "stocks", name: "📈 البورصة", icon: BarChart3 },
+  { id: "bankrates", name: "🏦 أسعار الفائدة", icon: TrendingUp },
+  { id: "construction", name: "🏗️ البناء", icon: HardHat },
 ];
 
 export function AppSidebar() {
@@ -78,7 +96,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-2">
-            Sectors
+            Sectors (16)
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1">
@@ -94,7 +112,7 @@ export function AppSidebar() {
                     >
                       <Link href={path}>
                         <cat.icon className="w-4 h-4" />
-                        <span>{cat.name}</span>
+                        <span className="text-sm">{cat.name}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

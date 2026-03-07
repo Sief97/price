@@ -3,28 +3,36 @@ import { useRoute } from "wouter";
 import { useCurrentPrices } from "@/hooks/use-prices";
 import { PriceCard } from "@/components/shared/PriceCard";
 import { AdSlot } from "@/components/shared/AdSlot";
-import { Coins, Globe2, Fuel, Lightbulb, ShoppingCart, Smartphone, HardHat, Ticket, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
 
-const CATEGORY_MAP: Record<string, { name: string; exactMatch?: string; icon: React.ElementType }> = {
-  "metals-currency": { name: "Metals & Currency", exactMatch: "🪙 Metals & Currency", icon: Coins },
-  "global-benchmarks": { name: "Global Benchmarks", exactMatch: "🌍 Global Benchmarks", icon: Globe2 },
-  "energy-fuel": { name: "Energy & Fuel", exactMatch: "⛽ Energy & Fuel", icon: Fuel },
-  "utilities-services": { name: "Utilities & Services", exactMatch: "💡 Utilities & Services", icon: Lightbulb },
-  "basic-groceries": { name: "Basic Groceries", exactMatch: "🛒 Basic Groceries & Food", icon: ShoppingCart },
-  "tech-electronics": { name: "Tech & Electronics", exactMatch: "📱 Tech & Electronics", icon: Smartphone },
-  "construction-agriculture": { name: "Construction & Ag.", exactMatch: "🏗️ Construction & Agriculture", icon: HardHat },
-  "digital-subscriptions": { name: "Digital Subscriptions", exactMatch: "🎟️ Digital Subscriptions & Entertainment", icon: Ticket },
+const CATEGORY_MAP: Record<string, string> = {
+  "currencies": "💱 العملات",
+  "crypto": "₿ العملات الرقمية",
+  "metals": "🥇 المعادن",
+  "fuel": "⛽ الوقود",
+  "electricity": "💡 الكهرباء",
+  "vegetables": "🥬 الخضار",
+  "subscriptions": "📺 الاشتراكات",
+  "transport": "🚇 المواصلات",
+  "tobacco": "🚬 التبغ",
+  "commodities": "🛒 السلع الأساسية",
+  "automotive": "🚗 السيارات",
+  "tech": "📱 التكنولوجيا",
+  "govservices": "🏛️ الخدمات الحكومية",
+  "stocks": "📈 البورصة",
+  "bankrates": "🏦 أسعار الفائدة",
+  "construction": "🏗️ البناء",
 };
 
 export default function Category() {
   const [, params] = useRoute("/category/:id");
   const categoryId = params?.id || "";
-  const catConfig = CATEGORY_MAP[categoryId];
+  const categoryName = CATEGORY_MAP[categoryId];
   
   const { currentPrices, isLoading } = useCurrentPrices();
 
-  if (!catConfig) {
+  if (!categoryName) {
     return (
       <div className="text-center py-20">
         <h2 className="text-2xl font-bold mb-4">Category not found</h2>
@@ -32,8 +40,6 @@ export default function Category() {
       </div>
     );
   }
-
-  const Icon = catConfig.icon;
 
   if (isLoading) {
     return (
@@ -48,12 +54,7 @@ export default function Category() {
     );
   }
 
-  // Filter items. We check exactMatch or fallback to partial includes
-  const filteredItems = currentPrices?.filter(item => 
-    catConfig.exactMatch 
-      ? item.category === catConfig.exactMatch 
-      : item.category.includes(catConfig.name)
-  ) || [];
+  const filteredItems = currentPrices?.filter(item => item.category === categoryName) || [];
 
   return (
     <div className="space-y-8 pb-12">
@@ -67,11 +68,11 @@ export default function Category() {
         
         <div className="flex items-center gap-4">
           <div className="p-4 bg-background border border-white/5 rounded-xl shadow-lg">
-            <Icon className="w-8 h-8 text-primary" />
+            <span className="text-2xl">{categoryName.charAt(0)}</span>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-foreground tracking-tight">{catConfig.name}</h1>
-            <p className="text-muted-foreground mt-1">{filteredItems.length} markets tracked</p>
+            <h1 className="text-3xl font-bold text-foreground tracking-tight">{categoryName}</h1>
+            <p className="text-muted-foreground mt-1">{filteredItems.length} السلع المتعقبة</p>
           </div>
         </div>
       </div>
@@ -86,7 +87,7 @@ export default function Category() {
             </div>
           ) : (
             <div className="py-20 text-center border border-white/5 rounded-2xl bg-card/30">
-              <p className="text-muted-foreground">No data currently available for this category.</p>
+              <p className="text-muted-foreground">لا توجد بيانات متاحة حالياً في هذه الفئة.</p>
             </div>
           )}
         </div>
