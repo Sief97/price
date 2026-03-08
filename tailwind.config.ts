@@ -6,9 +6,9 @@ export default {
   theme: {
     extend: {
       borderRadius: {
-        lg: ".5625rem", /* 9px */
-        md: ".375rem", /* 6px */
-        sm: ".1875rem", /* 3px */
+        lg: "0.5rem",
+        md: "0.375rem",
+        sm: "0.1875rem",
       },
       colors: {
         // Flat / base colors (regular buttons)
@@ -100,6 +100,12 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      boxShadow: {
+        sm: "0 1px 2px 0 rgba(0, 0, 0, 0.03)",
+        DEFAULT: "0 1px 3px 0 rgba(0, 0, 0, 0.05)",
+        md: "0 4px 6px -1px rgba(0, 0, 0, 0.07)",
+        lg: "0 10px 15px -3px rgba(0, 0, 0, 0.08)",
       },
     },
   },
