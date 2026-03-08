@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
 import { useSidebar } from "@/components/ui/sidebar";
+import { useLanguage } from "@/lib/useLanguage";
 import { 
   Home, 
   DollarSign,
@@ -17,7 +18,8 @@ import {
   Smartphone,
   Building2,
   HardHat,
-  Home as HomeLogo
+  Globe2,
+  Settings
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,38 +33,43 @@ import {
 } from "@/components/ui/sidebar";
 
 const CATEGORIES = [
-  { id: "currencies", name: "💱 العملات", icon: DollarSign },
-  { id: "crypto", name: "₿ العملات الرقمية", icon: Coins },
-  { id: "metals", name: "🥇 المعادن", icon: Coins },
-  { id: "fuel", name: "⛽ الوقود", icon: Fuel },
-  { id: "electricity", name: "💡 الكهرباء", icon: Zap },
-  { id: "vegetables", name: "🥬 الخضار", icon: Leaf },
-  { id: "subscriptions", name: "📺 الاشتراكات", icon: Ticket },
-  { id: "transport", name: "🚇 المواصلات", icon: MapPin },
-  { id: "tobacco", name: "🚬 التبغ", icon: Cigarette },
-  { id: "commodities", name: "🛒 السلع الأساسية", icon: ShoppingCart },
-  { id: "automotive", name: "🚗 السيارات", icon: TrendingUp },
-  { id: "tech", name: "📱 التكنولوجيا", icon: Smartphone },
-  { id: "govservices", name: "🏛️ الخدمات الحكومية", icon: Building2 },
-  { id: "stocks", name: "📈 البورصة", icon: BarChart3 },
-  { id: "bankrates", name: "🏦 أسعار الفائدة", icon: TrendingUp },
-  { id: "construction", name: "🏗️ البناء", icon: HardHat },
+  { id: "currencies", name: "💱 العملات", nameEn: "Currencies", icon: DollarSign },
+  { id: "crypto", name: "₿ العملات الرقمية", nameEn: "Crypto", icon: Coins },
+  { id: "metals", name: "🥇 المعادن", nameEn: "Metals", icon: Coins },
+  { id: "fuel", name: "⛽ الوقود", nameEn: "Fuel", icon: Fuel },
+  { id: "electricity", name: "💡 الكهرباء", nameEn: "Electricity", icon: Zap },
+  { id: "vegetables", name: "🥬 الخضار", nameEn: "Vegetables", icon: Leaf },
+  { id: "subscriptions", name: "📺 الاشتراكات", nameEn: "Subscriptions", icon: Ticket },
+  { id: "transport", name: "🚇 المواصلات", nameEn: "Transport", icon: MapPin },
+  { id: "tobacco", name: "🚬 التبغ", nameEn: "Tobacco", icon: Cigarette },
+  { id: "commodities", name: "🛒 السلع الأساسية", nameEn: "Commodities", icon: ShoppingCart },
+  { id: "automotive", name: "🚗 السيارات", nameEn: "Automotive", icon: TrendingUp },
+  { id: "tech", name: "📱 التكنولوجيا", nameEn: "Technology", icon: Smartphone },
+  { id: "govservices", name: "🏛️ الخدمات الحكومية", nameEn: "Government", icon: Building2 },
+  { id: "stocks", name: "📈 البورصة", nameEn: "Stocks", icon: BarChart3 },
+  { id: "bankrates", name: "🏦 أسعار الفائدة", nameEn: "Bank Rates", icon: TrendingUp },
+  { id: "construction", name: "🏗️ البناء", nameEn: "Construction", icon: HardHat },
 ];
 
 export function AppSidebar() {
   const [location] = useLocation();
   const { setOpenMobile } = useSidebar();
+  const { isArabic, language, setLanguage, t } = useLanguage();
 
   const handleNavigation = () => {
     setOpenMobile(false);
   };
 
+  const toggleLanguage = () => {
+    setLanguage(isArabic ? 'en' : 'ar');
+  };
+
   return (
-    <Sidebar variant="inset" className="border-r border-border bg-sidebar">
+    <Sidebar variant="inset" className="border-r border-border bg-sidebar bg-opacity-100 backdrop-blur-0">
       <SidebarContent className="px-3 py-4 no-scrollbar">
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-3">
-            القائمة الرئيسية
+            {isArabic ? 'القائمة الرئيسية' : 'Main Menu'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -74,8 +81,8 @@ export function AppSidebar() {
                   className="rounded-lg data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium transition-all text-sm"
                 >
                   <Link href="/">
-                    <HomeLogo className="w-4 h-4" />
-                    <span>الرئيسية</span>
+                    <Home className="w-4 h-4 text-muted-foreground" />
+                    <span>{t('home')}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -87,13 +94,14 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-3">
-            القطاعات (16)
+            {isArabic ? 'القطاعات (16)' : 'Sectors (16)'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1">
               {CATEGORIES.map((cat) => {
                 const path = `/category/${cat.id}`;
                 const isActive = location === path;
+                const displayName = isArabic ? cat.name : cat.nameEn;
                 return (
                   <SidebarMenuItem key={cat.id}>
                     <SidebarMenuButton 
@@ -103,8 +111,8 @@ export function AppSidebar() {
                       className="rounded-lg data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium hover:bg-muted transition-all text-sm"
                     >
                       <Link href={path}>
-                        <cat.icon className="w-4 h-4" />
-                        <span className="text-sm">{cat.name}</span>
+                        <cat.icon className="w-4 h-4 text-muted-foreground" />
+                        <span className="text-sm">{displayName}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -113,6 +121,17 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Language Switcher */}
+        <div className="mt-auto pt-4 border-t border-border">
+          <button
+            onClick={toggleLanguage}
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted transition-all text-sm font-medium text-muted-foreground hover:text-foreground"
+          >
+            <Globe2 className="w-4 h-4" />
+            <span>{isArabic ? 'English' : 'العربية'}</span>
+          </button>
+        </div>
       </SidebarContent>
     </Sidebar>
   );
