@@ -27,16 +27,10 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden relative">
           {/* Logo + Ticker Bar */}
           <div className="h-14 md:h-16 bg-card border-b border-border flex items-center flex-shrink-0 sticky top-0 z-40">
-            {/* Fixed Logo Section */}
+            {/* Fixed Logo Section - Text Only */}
             <Link href="/" className="flex items-center gap-2 cursor-pointer group px-4 md:px-6 flex-shrink-0">
-              <div className="w-7 h-7 md:w-8 md:h-8 rounded-md bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-white font-bold text-sm md:text-base">
-                P
-              </div>
-              <div className="flex flex-col hidden sm:block">
+              <div className="flex flex-col">
                 <span className="font-bold text-sm md:text-base leading-tight text-foreground">Price.eg</span>
-                <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-muted-foreground font-semibold">
-                  {isArabic ? 'أرشيف' : 'Archive'}
-                </span>
               </div>
             </Link>
 
