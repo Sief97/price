@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Search, Menu, X, ArrowRight } from "lucide-react";
+import { Search, Menu, X, ArrowRight, Globe2 } from "lucide-react";
 import { useCurrentPrices } from "@/hooks/use-prices";
 import { useLanguage } from "@/lib/useLanguage";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
@@ -11,7 +11,7 @@ export function Header() {
   const [, setLocation] = useLocation();
   const { currentPrices } = useCurrentPrices();
   const { toggleSidebar, isMobile } = useSidebar();
-  const { isArabic, t } = useLanguage();
+  const { isArabic, setLanguage } = useLanguage();
 
   const searchResults = React.useMemo(() => {
     if (!searchQuery.trim() || !currentPrices) return [];
@@ -23,6 +23,10 @@ export function Header() {
       )
       .slice(0, 5);
   }, [searchQuery, currentPrices]);
+
+  const handleLanguageToggle = () => {
+    setLanguage(isArabic ? 'en' : 'ar');
+  };
 
   return (
     <header className="sticky top-14 md:top-16 z-40 w-full border-b border-border bg-card/80 backdrop-blur-xl">
@@ -41,11 +45,11 @@ export function Header() {
             relative flex items-center w-full rounded-lg border transition-all duration-300
             ${isSearchFocused ? 'border-primary ring-4 ring-primary/10 bg-background' : 'border-border bg-muted/30 hover:bg-muted/50'}
           `}>
-            <Search className={`${isArabic ? 'right-3' : 'left-3'} absolute w-4 h-4 ${isSearchFocused ? 'text-primary' : 'text-muted-foreground'}`} />
+            <Search className={`${isArabic ? 'right-3' : 'left-3'} absolute w-4 h-4 text-muted-foreground`} />
             <input
               type="text"
               className={`w-full h-10 ${isArabic ? 'pr-10 pl-4' : 'pl-10 pr-4'} bg-transparent outline-none text-sm placeholder:text-muted-foreground/70`}
-              placeholder={t('search_placeholder')}
+              placeholder={isArabic ? "ابحث عن السلع..." : "Search markets..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
@@ -99,6 +103,16 @@ export function Header() {
             </div>
           )}
         </div>
+
+        {/* Language Toggle Button */}
+        <button
+          onClick={handleLanguageToggle}
+          className="p-2 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-all text-sm font-medium hidden md:flex items-center gap-2"
+          title={isArabic ? "Switch to English" : "التبديل إلى العربية"}
+        >
+          <Globe2 className="w-4 h-4" />
+          <span className="text-xs">{isArabic ? 'EN' : 'AR'}</span>
+        </button>
       </div>
     </header>
   );

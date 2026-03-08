@@ -54,18 +54,18 @@ const CATEGORIES = [
 export function AppSidebar() {
   const [location] = useLocation();
   const { setOpenMobile } = useSidebar();
-  const { isArabic, language, setLanguage, t } = useLanguage();
+  const { isArabic } = useLanguage();
 
   const handleNavigation = () => {
     setOpenMobile(false);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(isArabic ? 'en' : 'ar');
-  };
-
   return (
-    <Sidebar variant="inset" className="border-r border-border bg-sidebar bg-opacity-100 backdrop-blur-0">
+    <Sidebar 
+      variant="inset" 
+      side={isArabic ? "right" : "left"}
+      className="border-r border-border bg-sidebar bg-opacity-100 backdrop-blur-0"
+    >
       <SidebarContent className="px-3 py-4 no-scrollbar">
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-3">
@@ -82,7 +82,7 @@ export function AppSidebar() {
                 >
                   <Link href="/">
                     <Home className="w-4 h-4 text-muted-foreground" />
-                    <span>{t('home')}</span>
+                    <span>{isArabic ? 'الرئيسية' : 'Home'}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -121,17 +121,6 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        {/* Language Switcher */}
-        <div className="mt-auto pt-4 border-t border-border">
-          <button
-            onClick={toggleLanguage}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-muted transition-all text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            <Globe2 className="w-4 h-4" />
-            <span>{isArabic ? 'English' : 'العربية'}</span>
-          </button>
-        </div>
       </SidebarContent>
     </Sidebar>
   );

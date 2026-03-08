@@ -49,8 +49,8 @@
     --input: 210 14% 96%;
     --ring: 210 100% 50%;
 
-    /* Sidebar Variables */
-    --sidebar-background: 210 14% 97%;
+    /* Sidebar Variables - WHITE BACKGROUND */
+    --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 210 10% 20%;
     --sidebar-primary: 210 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -114,9 +114,17 @@
     animation-play-state: paused;
   }
 
-  /* Monochrome Icons */
+  /* Monochrome Icons - Force all icons to be gray */
   svg {
-    @apply text-muted-foreground;
+    @apply text-muted-foreground !important;
+  }
+  
+  button svg {
+    @apply text-muted-foreground !important;
+  }
+  
+  a svg {
+    @apply text-muted-foreground !important;
   }
 }
 
