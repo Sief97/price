@@ -1,25 +1,23 @@
 import React from "react";
 import { Link, useLocation } from "wouter";
+import { useSidebar } from "@/components/ui/sidebar";
 import { 
   Home, 
   DollarSign,
   Coins,
-  Globe2, 
   Fuel, 
-  Lightbulb, 
-  ShoppingCart, 
-  Smartphone, 
-  HardHat, 
-  Ticket,
+  Zap,
   Leaf,
   BarChart3,
-  Zap,
+  Ticket,
   MapPin,
   Cigarette,
-  Utensils,
+  ShoppingCart,
   TrendingUp,
+  Smartphone,
   Building2,
-  BookOpen
+  HardHat,
+  Home as HomeLogo
 } from "lucide-react";
 import {
   Sidebar,
@@ -27,7 +25,6 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -54,25 +51,18 @@ const CATEGORIES = [
 
 export function AppSidebar() {
   const [location] = useLocation();
+  const { setOpenMobile } = useSidebar();
+
+  const handleNavigation = () => {
+    setOpenMobile(false);
+  };
 
   return (
-    <Sidebar variant="inset" className="border-r border-white/5 bg-sidebar">
-      <SidebarHeader className="h-16 flex items-center justify-center border-b border-white/5">
-        <Link href="/" className="flex items-center gap-3 w-full px-4 cursor-pointer group">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-bold shadow-lg group-hover:shadow-primary/20 transition-all">
-            P
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-lg tracking-tight leading-none text-sidebar-foreground">Price.eg</span>
-            <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-semibold mt-0.5">Archive</span>
-          </div>
-        </Link>
-      </SidebarHeader>
-      
-      <SidebarContent className="px-2 py-4 no-scrollbar">
+    <Sidebar variant="inset" className="border-r border-border bg-sidebar">
+      <SidebarContent className="px-3 py-4 no-scrollbar">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-2">
-            Dashboard
+          <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-3">
+            القائمة الرئيسية
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -80,11 +70,12 @@ export function AppSidebar() {
                 <SidebarMenuButton 
                   asChild 
                   isActive={location === "/"}
-                  className="rounded-xl data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium transition-all"
+                  onClick={handleNavigation}
+                  className="rounded-lg data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium transition-all text-sm"
                 >
                   <Link href="/">
-                    <Home className="w-4 h-4" />
-                    <span>Market Overview</span>
+                    <HomeLogo className="w-4 h-4" />
+                    <span>الرئيسية</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -92,11 +83,11 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <div className="my-4 border-t border-white/5 mx-2" />
+        <div className="my-3 border-t border-border mx-0" />
 
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-2">
-            Sectors (16)
+          <SidebarGroupLabel className="text-xs uppercase tracking-widest text-muted-foreground/70 font-bold mb-3">
+            القطاعات (16)
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1">
@@ -108,7 +99,8 @@ export function AppSidebar() {
                     <SidebarMenuButton 
                       asChild 
                       isActive={isActive}
-                      className="rounded-xl data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium hover:bg-white/5 transition-all"
+                      onClick={handleNavigation}
+                      className="rounded-lg data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium hover:bg-muted transition-all text-sm"
                     >
                       <Link href={path}>
                         <cat.icon className="w-4 h-4" />
