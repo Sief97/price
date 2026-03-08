@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Cairo:wght@300;400;500;600;700;800&900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --font-sans: 'Cairo', sans-serif;
+    --font-sans: 'Cairo', 'Inter', sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
 
     /* Echelon Minimal Theme - Light, clean, professional */
@@ -112,6 +112,11 @@
   }
   .animate-marquee:hover {
     animation-play-state: paused;
+  }
+
+  /* Monochrome Icons */
+  svg {
+    @apply text-muted-foreground;
   }
 }
 
