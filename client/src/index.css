@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,60 +6,60 @@
 
 @layer base {
   :root {
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-sans: 'Inter', sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
 
-    /* Dark Mode Financial Theme - Robinhood / Bloomberg inspired */
-    --background: 240 10% 4%;
-    --foreground: 0 0% 98%;
+    /* Echelon Minimal Theme - Light, clean, professional */
+    --background: 0 0% 99.5%;
+    --foreground: 210 10% 12%;
 
-    --card: 240 10% 6%;
-    --card-foreground: 0 0% 98%;
-    --card-border: 240 10% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 10% 12%;
+    --card-border: 210 14% 89%;
 
-    --popover: 240 10% 6%;
-    --popover-foreground: 0 0% 98%;
-    --popover-border: 240 10% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 10% 12%;
+    --popover-border: 210 14% 89%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --primary-border: 0 0% 80%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-border: 210 100% 60%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --secondary-border: 240 3.7% 20%;
+    --secondary: 210 14% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-border: 210 14% 30%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --muted-border: 240 3.7% 20%;
+    --muted: 210 14% 90%;
+    --muted-foreground: 210 8% 40%;
+    --muted-border: 210 14% 85%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --accent-border: 240 3.7% 20%;
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-border: 210 100% 60%;
 
     /* Financial Indicators */
     --success: 142 71% 45%;
     --success-foreground: 144 100% 98%;
     
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
     --destructive-border: 0 84% 50%;
 
-    --border: 240 10% 12%;
-    --input: 240 10% 15%;
-    --ring: 240 4.9% 83.9%;
+    --border: 210 14% 89%;
+    --input: 210 14% 96%;
+    --ring: 210 100% 50%;
 
     /* Sidebar Variables */
-    --sidebar-background: 240 10% 5%;
-    --sidebar-foreground: 240 5% 85%;
-    --sidebar-primary: 224 76% 48%;
+    --sidebar-background: 210 14% 97%;
+    --sidebar-foreground: 210 10% 20%;
+    --sidebar-primary: 210 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 10% 12%;
-    --sidebar-accent-foreground: 240 5% 96%;
-    --sidebar-border: 240 10% 12%;
-    --sidebar-ring: 217 91% 60%;
+    --sidebar-accent: 210 14% 90%;
+    --sidebar-accent-foreground: 210 10% 20%;
+    --sidebar-border: 210 14% 89%;
+    --sidebar-ring: 210 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -72,7 +72,7 @@
     font-family: var(--font-sans);
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-semibold tracking-tight;
   }
   
   /* Scrollbar hiding for cleaner UI */
@@ -95,15 +95,15 @@
   }
 
   .hover-elevate {
-    @apply transition-transform duration-200 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-black/50;
+    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/5;
   }
   
   .glass-panel {
-    @apply bg-card/80 backdrop-blur-md border border-white/5 shadow-xl;
+    @apply bg-card border border-border shadow-sm;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80;
   }
 
   /* Custom Marquee Animation */
